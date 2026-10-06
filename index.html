@@ -1,178 +1,73 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Tools</title>
+<section class="card">
+  <h2>Инструменты для текста</h2>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <textarea
+    id="text"
+    placeholder="Введите или вставьте текст сюда..."
+  ></textarea>
 
-body {
-  margin: 0;
-  padding: 40px 20px;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #f2f4f8;
-  color: #222;
-}
+  <div class="stats">
+    <div class="stat">
+      <strong>Символов:</strong>
+      <span id="characters">0</span>
+    </div>
 
-.app {
-  max-width: 850px;
-  margin: 0 auto;
-  padding: 35px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.12);
-}
+    <div class="stat">
+      <strong>Слов:</strong>
+      <span id="words">0</span>
+    </div>
 
-h1 {
-  margin-top: 0;
-  font-size: 42px;
-}
-
-p {
-  color: #666;
-  font-size: 17px;
-}
-
-textarea {
-  width: 100%;
-  height: 220px;
-  padding: 16px;
-  font-size: 17px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  resize: vertical;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-button {
-  padding: 12px 18px;
-  border: 0;
-  border-radius: 10px;
-  background: #222;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.stats {
-  margin-top: 25px;
-  padding: 18px;
-  background: #f4f4f4;
-  border-radius: 12px;
-  font-size: 17px;
-}
-
-#message {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-@media (max-width: 600px) {
-  .app {
-    padding: 22px;
-  }
-
-  h1 {
-    font-size: 32px;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<div class="app">
-  <h1>Smart Tools</h1>
-  <p>Бесплатные инструменты для работы с текстом.</p>
-
-  <textarea id="text" placeholder="Вставьте или напишите текст здесь..."></textarea>
+    <div class="stat">
+      <strong>Строк:</strong>
+      <span id="lines">0</span>
+    </div>
+  </div>
 
   <div class="buttons">
     <button onclick="upperCase()">ЗАГЛАВНЫЕ</button>
-    <button onclick="lowerCase()">строчные</button>
-    <button onclick="cleanSpaces()">Убрать лишние пробелы</button>
-    <button onclick="copyText()">Копировать</button>
-    <button onclick="clearText()">Очистить</button>
-  </div>
 
-  <div class="stats">
-    <strong>Символов:</strong> <span id="characters">0</span>
-    &nbsp; | &nbsp;
-    <strong>Слов:</strong> <span id="words">0</span>
+    <button onclick="lowerCase()">строчные</button>
+
+    <button onclick="capitalizeWords()">
+      Каждое Слово С Большой
+    </button>
+
+    <button onclick="cleanSpaces()">
+      Убрать лишние пробелы
+    </button>
+
+    <button onclick="removeEmptyLines()">
+      Убрать пустые строки
+    </button>
+
+    <button onclick="reverseText()">
+      Перевернуть текст
+    </button>
+
+    <button onclick="copyText()">
+      Копировать
+    </button>
+
+    <button class="secondary" onclick="clearText()">
+      Очистить
+    </button>
   </div>
 
   <div id="message"></div>
-</div>
+</section>
 
-<script>
-const text = document.getElementById("text");
+<section class="card about">
+  <h2>О Smart Tools</h2>
 
-function updateStats() {
-  const value = text.value;
+  <p>
+    Smart Tools — бесплатный набор простых онлайн-инструментов
+    для работы с текстом. Здесь можно считать слова и символы,
+    менять регистр текста, удалять лишние пробелы и пустые строки,
+    копировать и быстро редактировать текст.
+  </p>
 
-  document.getElementById("characters").textContent = value.length;
-
-  const trimmed = value.trim();
-  document.getElementById("words").textContent =
-    trimmed === "" ? 0 : trimmed.split(/\s+/).length;
-}
-
-function upperCase() {
-  text.value = text.value.toUpperCase();
-  updateStats();
-}
-
-function lowerCase() {
-  text.value = text.value.toLowerCase();
-  updateStats();
-}
-
-function cleanSpaces() {
-  text.value = text.value
-    .replace(/[ \t]+/g, " ")
-    .replace(/\n\s+/g, "\n")
-    .trim();
-
-  updateStats();
-}
-
-async function copyText() {
-  try {
-    await navigator.clipboard.writeText(text.value);
-    document.getElementById("message").textContent = "Текст скопирован!";
-  } catch {
-    document.getElementById("message").textContent = "Не удалось скопировать текст.";
-  }
-}
-
-function clearText() {
-  text.value = "";
-  document.getElementById("message").textContent = "";
-  updateStats();
-}
-
-text.addEventListener("input", updateStats);
-updateStats();
-</script>
-
-</body>
-</html>
+  <p>
+    Все инструменты работают прямо в браузере.
+    Для использования сайта не требуется регистрация.
+  </p>
+</section>
